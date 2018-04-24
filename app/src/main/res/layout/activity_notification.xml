@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.hostelmanager.hosteladmin.Notification"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        android:id="@+id/topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Topic"
+        android:inputType="textPersonName"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Desc"
+        android:inputType="text|textMultiLine"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/sendnotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEND"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        tools:ignore="MissingConstraints" />
+
+</RelativeLayout>
