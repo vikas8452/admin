@@ -1,17 +1,10 @@
 package com.hostelmanager.hosteladmin;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,17 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 //import com.onesignal.OneSignal;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity
@@ -39,17 +34,18 @@ public class MainActivity extends AppCompatActivity
 
     private DatabaseReference databaseReference;
     private FirebaseFirestore firebaseFirestore;
+    private FirebaseFunctions mFunctions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*OneSignal.startInit(this)
+       /* OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();*/
-      //  Intent in = new Intent(getApplicationContext(),NotiBg.class);
-        //startService(in);
-        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("News");
+        FirebaseMessaging.getInstance().subscribeToTopic("Movies");
 
         setContentView(R.layout.activity_main);
 
@@ -58,20 +54,6 @@ public class MainActivity extends AppCompatActivity
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
 
-        databaseReference.child("+917388796555").child("Notifications").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot ds) {
-
-
-                Toast.makeText(getApplicationContext(), "YEAAA ", Toast.LENGTH_SHORT).show();
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -138,17 +120,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.addHosteler) {
-            startActivity(new Intent(this,AddHosteler.class));
             // Handle the camera action
         } else if (id == R.id.notification) {
             startActivity(new Intent(this,SendNotifications.class));
 
-        } else if (id == R.id.nav_slideshow) {
-            //startActivity(new Intent(this,SendNotifications.class));
+        } else if (id == R.id.showissues) {
+            startActivity(new Intent(this,IssuesList.class));
 
-        } else if (id == R.id.nav_manage) {
-            //startActivity(new Intent(this,Notification.class));
 
+        } else if (id == R.id.verified) {
+            Verified Verified=new Verified();
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.relativefrag , Verified).commit();
+        } else if (id == R.id.nonverified) {
+            NonVerified nonVerified=new NonVerified();
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.relativefrag , nonVerified).commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -187,5 +174,23 @@ public class MainActivity extends AppCompatActivity
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),pn);
 
     }*/
+    private Task<String> addMessage(String text) {
+        // Create the arguments to the callable function, which is just one string
+        Map<String, Object> data = new HashMap<>();
+        data.put("text", text);
 
+        return mFunctions
+                .getHttpsCallable("addMessage")
+                .call(data)
+                .continueWith(new Continuation<HttpsCallableResult, String>() {
+                    @Override
+                    public String then(@NonNull Task<HttpsCallableResult> task) throws Exception {
+                        // This continuation runs on either success or failure, but if the task
+                        // has failed then getResult() will throw an Exception which will be
+                        // propagated down.
+                        String result = (String) task.getResult().getData();
+                        return result;
+                    }
+                });
+    }
 }

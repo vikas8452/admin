@@ -367,6 +367,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "38556870881-8r5bu0ac8dbe4itlbo49b3aqvlleubfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hostelmanager.hosteladmin",
+            "certificate_hash": "c973d0a8c5c0fcbb0c7890d7ed838213137b5e02"
+          }
+        },
+        {
           "client_id": "38556870881-n19oo0k0n2m0n6cf3263s9k231gdp4g4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

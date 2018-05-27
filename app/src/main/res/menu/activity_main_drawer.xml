@@ -13,13 +13,17 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Notify" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/showissues"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Issues" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/verified"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Verified User" />
+        <item
+            android:id="@+id/nonverified"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Non-Verified User" />
     </group>
 
     <item android:title="Communicate">

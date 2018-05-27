@@ -19,6 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SendNotifications" />
+        <activity android:name=".Notification" />
+        <activity android:name=".StudentDetail" />
+
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="true" />
 
         <service android:name=".RecieveNotification2">
             <intent-filter>
@@ -30,19 +37,14 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <activity android:name=".MobileAndOTP" />
-        <activity android:name=".AddHosteler" />
-        <activity android:name=".SendNotifications" />
-        <activity android:name=".Notification" />
-
-        <meta-data android:name="firebase_messaging_auto_init_enabled"
-            android:value="true" />
-
         <service
             android:name=".NotiBg"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".IssuesList" />
+        <activity android:name=".DescriptionView" />
+        <activity android:name=".NotifyParticularUser"></activity>
     </application>
 
 </manifest>

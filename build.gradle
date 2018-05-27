@@ -2,19 +2,12 @@
 
 buildscript {
 
-    /*repositories {
-        maven { url 'https://plugins.gradle.org/m2/'}
-    }
-    dependencies {
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.8.1'
-    }*/
-    
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath 'com.google.gms:google-services:3.2.0'
 
 

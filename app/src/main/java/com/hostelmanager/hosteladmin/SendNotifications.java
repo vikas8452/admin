@@ -1,21 +1,11 @@
 package com.hostelmanager.hosteladmin;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,7 +24,7 @@ public class SendNotifications extends AppCompatActivity {
         setContentView(R.layout.activity_send_notifications);
 
         tv1 = findViewById(R.id.topic);
-        tv2 = findViewById(R.id.description);
+        tv2 = findViewById(R.id.issdescrip);
         sendn = findViewById(R.id.sendnotification);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -46,7 +36,8 @@ public class SendNotifications extends AppCompatActivity {
             public void onClick(View v) {
                 topic = tv1.getText().toString();
                 desc = tv2.getText().toString();
-                if(topic.equals(""))
+                sendoutbroadcast();
+               /* if(topic.equals(""))
                     Toast.makeText(SendNotifications.this,"Give topic",Toast.LENGTH_LONG).show();
                 else if(desc.equals(""))
                     Toast.makeText(SendNotifications.this,"Provide description",Toast.LENGTH_LONG).show();
@@ -55,18 +46,25 @@ public class SendNotifications extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(SendNotifications.this,e+"",Toast.LENGTH_LONG).show();
-                }
+                }*/
+
             }
         });
-        Intent inte = new Intent(SendNotifications.this,MainActivity.class);
+        /*Intent inte = new Intent(SendNotifications.this,MainActivity.class);
         inte.setAction("com.hostelmanager.SendBroadcast");
         inte.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        sendBroadcast(inte);
+        sendBroadcast(inte);*/
+    }
+    void sendoutbroadcast() {
+        Intent intent = new Intent("com.hostelmanager.sendbroadcast");
+
+        sendBroadcast(intent);
+        this.sendBroadcast(new Intent("com.hostelmanager.sendbroadcast"));
     }
 
     private void sendNotification(){
 
-        Intent in =new Intent(SendNotifications.this,MainActivity.class);
+        /*Intent in =new Intent(SendNotifications.this,MainActivity.class);
         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(SendNotifications.this,0 ,in,PendingIntent.FLAG_ONE_SHOT);
 
@@ -87,8 +85,10 @@ public class SendNotifications extends AppCompatActivity {
             NotificationChannel channel = new NotificationChannel(chid,"Channel human Readable title",NotificationManager.IMPORTANCE_DEFAULT);
             n.createNotificationChannel(channel);
         }
-        n.notify(0,noti.build());
+        n.notify(0,noti.build());*/
     }
+
+}
 
     /*private void sendNotification() throws IOException {
 
@@ -153,20 +153,7 @@ public class SendNotifications extends AppCompatActivity {
             }
         });
     }*/
-}
 
-        // The topic name can be optionally prefixed with "/topics/".
-       /* String topic = "highScores";
 
-// See documentation on defining a message payload.
-        NotificationCompat.MessagingStyle.Message message = NotificationCompat.MessagingStyle.Message.builder()
-                .putData("score", "850")
-                .putData("time", "2:45")
-                .setTopic(topic)
-                .build();
 
-// Send a message to the devices subscribed to the provided topic.
-        String response = FirebaseMessaging.getInstance().send(message).get();
-// Response is a message ID string.
-        System.out.println("Successfully sent message: " + response);*/
 

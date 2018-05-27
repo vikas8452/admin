@@ -1,4 +1,4 @@
-// apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+//apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 repositories {
     jcenter()
     maven { url 'https://maven.google.com' }
@@ -19,12 +19,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        /*manifestPlaceholders = [
-                onesignal_app_id               : 'd40bc8a5-d075-4a70-ae63-b7e06112270a',
-                // Project number pulled from dashboard, local value is ignored.
-                onesignal_google_project_number: 'REMOTE'
-        ]*/
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -43,25 +38,25 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     //noinspection GradleCompatible,GradleCompatible
-    implementation 'com.google.firebase:firebase-storage:15.0.0'
-    implementation 'com.google.firebase:firebase-auth:15.0.0'
-    implementation 'com.google.firebase:firebase-database:15.0.0'
-    implementation 'com.google.firebase:firebase-messaging:15.0.0'
+    implementation 'com.google.firebase:firebase-storage:15.0.2'
+    implementation 'com.google.firebase:firebase-auth:15.1.0'
+    implementation 'com.google.firebase:firebase-database:15.0.1'
+    implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation 'com.firebase:firebase-client-android:2.3.1'
+    implementation 'com.google.firebase:firebase-functions:15.0.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    //compile 'com.onesignal:OneSignal:3.8.3'
-
-
+    //implementation 'com.onesignal:OneSignal:3.8.3'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     implementation 'javax.annotation:javax.annotation-api:1.2'
     implementation 'com.google.code.gson:gson:2.8.1'
     //noinspection DuplicatePlatformClasses,DuplicatePlatformClasses
     //implementation 'org.apache.httpcomponents:httpclient:2.3.1'
 
-    implementation 'com.google.firebase:firebase-core:15.0.0'
+    implementation 'com.google.firebase:firebase-core:15.0.2'
     //implementation 'com.google.firebase:firebase-admin:15.0.0'
     implementation 'com.google.firebase:firebase-firestore:15.0.0'
     implementation "com.android.support:support-compat:27.1.1"
