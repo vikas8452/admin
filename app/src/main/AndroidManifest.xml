@@ -44,7 +44,8 @@
 
         <activity android:name=".IssuesList" />
         <activity android:name=".DescriptionView" />
-        <activity android:name=".NotifyParticularUser"></activity>
+        <activity android:name=".NotifyParticularUser" />
+        <activity android:name=".HostelLogin"></activity>
     </application>
 
 </manifest>

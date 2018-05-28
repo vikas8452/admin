@@ -57,8 +57,9 @@ public class Verified extends Fragment {
         gridView = view.findViewById(R.id.gridvf);
 
         ssv = view.findViewById(R.id.vsearch);
+        String uid = firebaseAuth.getUid();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Hostels").child("Royal Paradise");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Hostels").child(uid);
         databaseReference.keepSynced(true);
         //   helper=new FireBaseHelper(databaseReference);
 

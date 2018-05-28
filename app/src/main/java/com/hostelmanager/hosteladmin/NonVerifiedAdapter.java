@@ -99,7 +99,7 @@ public class NonVerifiedAdapter  extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference()
-                        .child("Hostels").child(hostelerInfo[0].getHostel()).child(hostelerInfo[0].getRoomno()).child(mob);
+                        .child("Hostels").child(hostelerInfo[0].getLuid()).child(hostelerInfo[0].getRoomno()).child(mob);
                 notifyDataSetChanged();
                 db.child("stat").setValue("2");
             }
@@ -108,7 +108,7 @@ public class NonVerifiedAdapter  extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 final DatabaseReference db = FirebaseDatabase.getInstance().getReference()
-                        .child("Hostels").child(hostelerInfo[0].getHostel()).child(hostelerInfo[0].getRoomno()).child(mob);
+                        .child("Hostels").child(hostelerInfo[0].getLuid()).child(hostelerInfo[0].getRoomno()).child(mob);
 
                 final AlertDialog.Builder alertbox = new AlertDialog.Builder(v.getRootView().getContext());
                 alertbox.setMessage("Are you sure");

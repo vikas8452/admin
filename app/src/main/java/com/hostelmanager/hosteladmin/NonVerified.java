@@ -57,7 +57,8 @@ public class NonVerified extends Fragment {
 
         sv = view.findViewById(R.id.search);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Hostels").child("Royal Paradise");
+        String uid = firebaseAuth.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Hostels").child(uid);
         databaseReference.keepSynced(true);
         //   helper=new FireBaseHelper(databaseReference);
 

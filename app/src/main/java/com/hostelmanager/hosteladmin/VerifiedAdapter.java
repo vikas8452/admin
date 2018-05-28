@@ -94,7 +94,7 @@ public class VerifiedAdapter extends BaseAdapter {
             public void onClick(View v) {
                 final DatabaseReference db = FirebaseDatabase.getInstance().getReference()
                         .child("Hostels")
-                        .child(hostelerInfo[0].getHostel())
+                        .child(hostelerInfo[0].getLuid())
                         .child(hostelerInfo[0].getRoomno())
                         .child(mob);
 

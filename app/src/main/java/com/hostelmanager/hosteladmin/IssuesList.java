@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.GridView;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class IssuesList extends AppCompatActivity {
 
     //private RecyclerView gridView;
+    private FirebaseAuth firebaseAuth;
     private MyItemRecyclerViewAdapter adapter;
     private ArrayList<SendRecieveIssues> sendRecieveIssues;
 
@@ -31,7 +34,9 @@ public class IssuesList extends AppCompatActivity {
 
         GridView gridView = findViewById(R.id.gridissue);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Issues").child("RP");
+        firebaseAuth= FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Issues").child(uid);
         databaseReference.keepSynced(true);
         //   helper=new FireBaseHelper(databaseReference);
 

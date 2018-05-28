@@ -17,6 +17,8 @@ import android.view.MenuItem;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +37,20 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference databaseReference;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseFunctions mFunctions;
+    private FirebaseAuth firebaseAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth= FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+
+        if(currentUser == null){
+            startActivity(new Intent(this,HostelLogin.class));
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +60,8 @@ public class MainActivity extends AppCompatActivity
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();*/
 
-        FirebaseMessaging.getInstance().subscribeToTopic("News");
-        FirebaseMessaging.getInstance().subscribeToTopic("Movies");
+       // FirebaseMessaging.getInstance().subscribeToTopic("News");
+        //FirebaseMessaging.getInstance().subscribeToTopic("Movies");
 
         setContentView(R.layout.activity_main);
 
@@ -174,7 +190,7 @@ public class MainActivity extends AppCompatActivity
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),pn);
 
     }*/
-    private Task<String> addMessage(String text) {
+    /*private Task<String> addMessage(String text) {
         // Create the arguments to the callable function, which is just one string
         Map<String, Object> data = new HashMap<>();
         data.put("text", text);
@@ -192,5 +208,6 @@ public class MainActivity extends AppCompatActivity
                         return result;
                     }
                 });
-    }
+    }*/
+
 }
